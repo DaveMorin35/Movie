@@ -23,6 +23,9 @@ const MovieList = () => {
                 <div className="flex justify-center text-4xl pt-2.5 uppercase">
                     <h2>Movie Database</h2>
                 </div>
+                <div className="flex justify-end mr-10">
+                    <button className=" border-2 p-2 rounded-lg">Login/Register</button>
+                </div>
                 <div className="grid grid-cols-4 gap-3 mt-10 place-items-center">
                     {movies.map((movie, index) => (
                         <div className="text-grey-700 list-none text-center">
