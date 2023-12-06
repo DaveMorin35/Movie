@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const MovieList = () => {
+const MovieList = ({handleLoginForm}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -17,24 +17,34 @@ const MovieList = () => {
         fetchMovie();
     }, []);
 
+    const truncateTitle = (title, maxlength) => {
+        return title.length > maxlength ? title.substring(0, maxlength) + "..." : title;
+    }
+
+
     return (
         <>
-            <div className=" bg-gradient-to-r from-cyan-500 to-blue-500 py-2.5">
-                <div className="flex justify-center text-4xl pt-2.5 uppercase">
+            <div className="bg-gradient-to-r from-blue-950 to-blue-800  py-2.5">
+                <div className="flex justify-center text-4xl pt-2.5 uppercase text-neutral-400 font-bold">
                     <h2>Movie Database</h2>
                 </div>
                 <div className="flex justify-end mr-10">
-                    <button className=" border-2 p-2 rounded-lg">Login/Register</button>
+                    <button
+                        className=" border-2 p-2 rounded-lg text-neutral-400"
+                        onClick={handleLoginForm}
+                    >Login/Register
+                    </button>
                 </div>
-                <div className="grid grid-cols-4 gap-3 mt-10 place-items-center">
+                <div className="grid grid-cols-4 gap-3 mt-10 place-items-center ">
                     {movies.map((movie, index) => (
-                        <div className="text-grey-700 list-none text-center">
+                        <div className="text-neutral-400 list-none text-center mb-3.5">
                             <img
-                                className="max-h-56 max-w-xs rounded-lg"
+                                className="max-h-56 max-w-xs rounded-lg transform transition duration-500
+                                hover:scale-110"
                                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                 alt={movie.title}
                             />
-                            <li key={index}>{movie.title}</li>
+                            <li className="mt-2" key={index}>{truncateTitle(movie.title, 18)}</li>
                         </div>
                     ))}
                 </div>

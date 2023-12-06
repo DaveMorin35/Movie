@@ -1,16 +1,20 @@
-
 import './App.css';
 import MovieList from "./Components/MovieList";
-import React from "react";
+import React, {useState} from "react";
+import Form from "./Components/Form";
 
-function App() {
+const App = () => {
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
   return (
 
   <>
-    <MovieList/>
+    {showLoginForm ? (<Form handleCloseForm={() => setShowLoginForm(false)}/> ):(
+    <MovieList handleLoginForm={() => setShowLoginForm(true)} />)}
+
   </>
 
   );
-}
+};
 
 export default App;
