@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const MovieList = ({handleLoginForm}) => {
+const MovieList = ({handleRegisterForm, handleLoginForm}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -31,8 +31,13 @@ const MovieList = ({handleLoginForm}) => {
                 <div className="flex justify-end mr-10">
                     <button
                         className=" border-2 p-2 rounded-lg text-neutral-400"
+                        onClick={handleRegisterForm}
+                    >Register
+                    </button>
+                    <button
+                        className=" border-2 p-2 rounded-lg text-neutral-400"
                         onClick={handleLoginForm}
-                    >Login/Register
+                    >Login
                     </button>
                 </div>
                 <div className="grid grid-cols-4 gap-3 mt-10 place-items-center ">

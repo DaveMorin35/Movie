@@ -1,37 +1,27 @@
 import {useState} from "react";
 
 
-const Form = ({handleCloseForm}) => {
+export function Login({handleCloseForm}) {
 
-    const [action, setAction] = useState("Sign Up");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const onRegisterFormSubmit = async  (event) => {
+    const onRegisterFormSubmit = (event) => {
         event.preventDefault();
 
-        try {
-        const response = await fetch("http://localhost:8080/user", {
+        fetch("http://localhost:8080/login", {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 username, password
-            }),
-        });
-        if(response.ok) {
-            console.log("User created")
-            const userData = response.json();
+            })
+        }).then(response => {
+            console.log("User find")
             console.log(response)
-        }else {
-            console.error("Error created user")
-        }
-    }catch (error){
-            console.error("Error", error);
-        }
+        })
     }
-
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-950 to-blue-800">
@@ -40,17 +30,11 @@ const Form = ({handleCloseForm}) => {
                      onClick={handleCloseForm}>X
                 </div>
                 <div className="submit-container">
-                    <div className={action === "Login" ? "submit gray" : "submit"} onClick={() => {
-                        setAction("Sign Up")
-                    }}>Sign Up
-                    </div>
-
-                    <div className={action === "Sign Up" ? "submit gray" : "submit"}
-                         onClick={() => setAction("Login")}>Login
+                    <div className="" onClick={onRegisterFormSubmit}>Login
                     </div>
                 </div>
                 <div className="flex flex-col place-items-center mt-8 ">
-                    <div className="text-3xl text-neutral-400">{action}</div>
+                    <div className="text-3xl text-neutral-400"></div>
                     <div className="flex place-items-center ">
                         <div
                             className="w-16 h-1.5 bg-blue-600 border-2 bg-gradient-to-r from-blue-950 to-blue-800"></div>
@@ -67,11 +51,13 @@ const Form = ({handleCloseForm}) => {
                                onChange={(event) => setPassword(event.target.value)}
                         />
                     </div>
-                    {action === "Sign Up" ? <div></div> :
-                        <div className="mt-3.5 ml-10 text-xs">Lost Password? <span
-                            className="cursor-pointer text-blue-800">Click Here!</span></div>}
+
+                    <div className="mt-3.5 ml-10 text-xs">Lost Password? <span
+                        className="cursor-pointer text-blue-800">Click Here!</span></div>
                     <div className="flex mt-8 rounded-2xl bg-gradient-to-r from-blue-950 to-blue-800">
-                        <button className="flex  p-2 w-32 justify-center text-white" onClick={onRegisterFormSubmit}>Submit</button>
+                        <button className="flex  p-2 w-32 justify-center text-white"
+                                onClick={onRegisterFormSubmit}>Submit
+                        </button>
                     </div>
                 </div>
             </div>
@@ -80,4 +66,4 @@ const Form = ({handleCloseForm}) => {
     )
 }
 
-export default Form;
+export default Login;
