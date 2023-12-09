@@ -2,13 +2,17 @@ package com.project.movie.database.controller;
 
 import com.project.movie.database.model.User;
 import com.project.movie.database.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Optional;
+
 
 @RestController
 public class UserController {
+
+
 
     private final UserService userServices;
 
@@ -28,7 +32,13 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public Boolean loginUsers(@RequestBody User name){
-        return this.userServices.validateLogin(name );
+    public ResponseEntity<?> loginUsers(@RequestBody User user){
+        if ( userServices.validateLogin(user)){
+            User userData = userServices.findByUsername(user.getUsername());
+            return ResponseEntity.ok(userData);
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
     }
+
 }

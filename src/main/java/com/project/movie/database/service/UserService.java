@@ -23,8 +23,8 @@ public abstract class UserService {
         return this.userRepository.save(newUser);
     }
 
-    public User findUser(User user) {
-        return this.userRepository.findByUsername(user.getUsername());
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username);
     }
 
     public boolean validateLogin(User user){

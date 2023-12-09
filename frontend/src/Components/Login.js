@@ -1,26 +1,40 @@
 import {useState} from "react";
 
 
-export function Login({handleCloseForm}) {
+export function Login({handleCloseForm, setLoginName, setShowLoginName}) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const {showLoginError, setShowLoginError} = useState(false);
 
     const onRegisterFormSubmit = (event) => {
         event.preventDefault();
 
+        const bodyData = {
+            username: username,
+            password: password
+        }
+
         fetch("http://localhost:8080/login", {
-            method: "post",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username, password
+            body: JSON.stringify(bodyData),
+
+        }).then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log("Login successfully")
+                    setLoginName(data.username)
+                    setShowLoginName(true)
+                    handleCloseForm()
+                } else {
+                    console.log("Login failed")
+                    setShowLoginError(true)
+                }
             })
-        }).then(response => {
-            console.log("User find")
-            console.log(response)
-        })
+            .catch(error => console.error("Error logging in:", error));
     }
 
     return (
@@ -29,6 +43,11 @@ export function Login({handleCloseForm}) {
                 <div className="flex justify-end mr-3.5 mt-3.5 font-bold text-xl cursor-pointer"
                      onClick={handleCloseForm}>X
                 </div>
+                {showLoginError ?
+                <div>
+                    <h2>Something is wrong. Please try again</h2>
+                </div> : <div></div>
+                }
                 <div className="submit-container">
                     <div className="" onClick={onRegisterFormSubmit}>Login
                     </div>

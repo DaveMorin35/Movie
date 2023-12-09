@@ -20,7 +20,7 @@ export function Users({token}) {
     useEffect(() => {
         loadUsers();
     }, [loadUsers]);
-
+console.log(users)
     return (
 
         <>

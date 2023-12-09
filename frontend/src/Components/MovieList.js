@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const MovieList = ({handleRegisterForm, handleLoginForm}) => {
+const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginName}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -21,13 +21,17 @@ const MovieList = ({handleRegisterForm, handleLoginForm}) => {
         return title.length > maxlength ? title.substring(0, maxlength) + "..." : title;
     }
 
-
     return (
         <>
             <div className="bg-gradient-to-r from-blue-950 to-blue-800  py-2.5">
                 <div className="flex justify-center text-4xl pt-2.5 uppercase text-neutral-400 font-bold">
                     <h2>Movie Database</h2>
                 </div>
+                {showLoginName ?
+                <div className="mr-10 mb-6 flex justify-end">
+                    <h2 className="text-2xl text-neutral-400">Welcome {loginName}</h2>
+                </div> : <div></div>
+                }
                 <div className="flex justify-end mr-10">
                     <button
                         className=" border-2 p-2 rounded-lg text-neutral-400"
