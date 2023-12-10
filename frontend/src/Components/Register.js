@@ -5,6 +5,7 @@ export function Register({handleCloseForm}) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [registrationSuccessfully, setRegistrationSuccessfully] = useState(false);
 
     const onRegisterFormSubmit = (event) => {
         event.preventDefault();
@@ -18,8 +19,8 @@ export function Register({handleCloseForm}) {
                 username, password
             })
         }).then(response => {
-            console.log("User created")
-            console.log(response)
+            console.log("User created");
+            setRegistrationSuccessfully(true);
         })
     }
 
@@ -29,9 +30,11 @@ export function Register({handleCloseForm}) {
                 <div className="flex justify-end mr-3.5 mt-3.5 font-bold text-xl cursor-pointer"
                      onClick={handleCloseForm}>X
                 </div>
+                {registrationSuccessfully ? <div className="flex justify-center">Registration successfully!</div>
+                    : <div></div>
+                }
                 <div className="submit-container">
-                    <div className="" onClick={onRegisterFormSubmit}>Register
-                    </div>
+                    <div className="" onClick={onRegisterFormSubmit}>Register</div>
                 </div>
                 <div className="flex flex-col place-items-center mt-8 ">
                     <div className="text-3xl text-neutral-400"></div>
