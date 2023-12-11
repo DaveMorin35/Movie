@@ -7,7 +7,6 @@ import Login from "./Components/Login";
 const App = () => {
     const [showLoginForm, setShowLoginForm] = useState(false);
     const [showRegistrationForm, setShowRegisterForm] = useState(false);
-    const [token, setToken] = useState(null);
     const [loginName, setLoginName] = useState("");
     const [showLoginName, setShowLoginName] = useState(false)
 
@@ -16,7 +15,7 @@ const App = () => {
             {showRegistrationForm ? (
                 <Register handleCloseForm={() => setShowRegisterForm(false)}/>
             ) : showLoginForm ? (
-                <Login handleCloseForm={() => setShowLoginForm(false)} setLoginName={setLoginName} setToken={setToken} setShowLoginName={setShowLoginName}/>
+                <Login handleCloseForm={() => setShowLoginForm(false)} setLoginName={setLoginName} setShowLoginName={setShowLoginName}/>
             ) : (
                 <MovieList
                     handleLoginForm={() => setShowLoginForm(true)}

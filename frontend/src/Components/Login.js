@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 
 export function Login({handleCloseForm, setLoginName, setShowLoginName}) {
@@ -15,7 +15,7 @@ export function Login({handleCloseForm, setLoginName, setShowLoginName}) {
             password: password
         }
 
-        fetch("http://localhost:8080/login", {
+        fetch("http://localhost:8080/session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
