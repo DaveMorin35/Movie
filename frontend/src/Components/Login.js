@@ -1,11 +1,12 @@
-import {useCallback, useState} from "react";
+import {useState} from "react";
 
 
-export function Login({handleCloseForm, setLoginName, setShowLoginName}) {
+export function Login({handleCloseForm, setLoginName, setShowLoginName, setToken}) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const {showLoginError, setShowLoginError} = useState(false);
+    const [showLoginError, setShowLoginError] = useState(false);
+ 
 
     const onRegisterFormSubmit = (event) => {
         event.preventDefault();
@@ -26,16 +27,19 @@ export function Login({handleCloseForm, setLoginName, setShowLoginName}) {
             .then(data => {
                 if (data) {
                     console.log("Login successfully")
-                    setLoginName(data.username)
+                    setLoginName(bodyData.username)
                     setShowLoginName(true)
                     handleCloseForm()
-                } else {
+                    setToken(data)
+                } 
+                else {
                     console.log("Login failed")
                     setShowLoginError(true)
                 }
             })
             .catch(error => console.error("Error logging in:", error));
     }
+
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-950 to-blue-800">

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginName}) => {
+const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginName, handleLogoutForm, setShowUserInfo}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -21,6 +21,10 @@ const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginNam
         return title.length > maxlength ? title.substring(0, maxlength) + "..." : title;
     }
 
+    const handleUserInfo = () => {
+        setShowUserInfo((prev) => (!prev));
+    }
+
     return (
         <>
             <div className="bg-gradient-to-r from-blue-950 to-blue-800  py-2.5">
@@ -32,6 +36,13 @@ const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginNam
                         <h2 className="text-2xl text-neutral-400">Welcome {loginName}</h2>
                     </div> : <div></div>
                 }
+                <div>
+                    <button 
+                    className=" border-2 p-2 rounded-lg text-neutral-400"
+                    onClick={handleUserInfo}
+                    >User infos
+                    </button>
+                </div>
                 <div className="flex justify-end mr-10">
                     <button
                         className=" border-2 p-2 rounded-lg text-neutral-400 mr-10 p-2"
@@ -39,9 +50,14 @@ const MovieList = ({handleRegisterForm, handleLoginForm, loginName, showLoginNam
                     >Register
                     </button>
                     <button
-                        className=" border-2 p-2 rounded-lg text-neutral-400"
+                        className=" border-2 p-2 rounded-lg text-neutral-400 mr-10 p-2"
                         onClick={handleLoginForm}
                     >Login
+                    </button>
+                    <button className=" border-2 p-2 rounded-lg text-neutral-400"
+                    onClick={handleLogoutForm}
+                    >
+                        Logout
                     </button>
                 </div>
                 <div className="grid grid-cols-4 gap-3 mt-10 place-items-center ">
