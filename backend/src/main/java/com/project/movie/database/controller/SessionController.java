@@ -64,7 +64,6 @@ public class SessionController {
 
     @GetMapping("/profile")
     public String getUserProfile(Authentication user){
-        System.out.println(user);
         return user.getName();
     }
 }

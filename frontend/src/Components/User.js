@@ -29,12 +29,9 @@ const User = ({token}) => {
       fetchUserInfo();
     }, [token]);
 
-console.log(user);
     return (
 <>
-<div>
-    {user}
-</div>
+
 </>
     )
 }

@@ -1,50 +1,62 @@
-import './App.css';
-import MovieList from "./Components/MovieList";
-import React, {useState} from "react";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
+import React from "react";
+import Home from "./Pages/Home";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Pages/Layout';
+import ErrorPage from './Pages/ErrorPage';
+import MovieList from './Components/MovieList';
+import Register from './Components/Register';
+import RegisterConfirmation from "./Pages/RegisterConfirmation";
+import Login from './Components/Login';
+import LoginConfirmation from "./Pages/LoginConfirmation";
 import User from "./Components/User";
+import Logout from "./Components/Logout";
 
+const router = createBrowserRouter([
+    {
+        path:'/',
+        element:<Layout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path:'movies',
+                element: <MovieList />
+            },
+            {
+                path:'register',
+                element: <Register />
+            },
+            {
+                path:'registerConfirmation',
+                element: <RegisterConfirmation />
+            },
+            {
+                path: 'login',
+                element: <Login />
+            },
+            {
+                path: 'loginConfirmation',
+                element: <LoginConfirmation />
+            },
+            {
+                path: 'user',
+                element: <User />
+            },
+            {
+                path: 'logout',
+                element: <Logout />
+            }
+        ],
+},
+]);
 
-const App = () => {
-    const [showLoginForm, setShowLoginForm] = useState(false);
-    const [showRegistrationForm, setShowRegisterForm] = useState(false);
-    const [loginName, setLoginName] = useState("");
-    const [showLoginName, setShowLoginName] = useState(false)
-    const [token, setToken] = useState(null);
-    const [showUserInfo, setShowUserInfo] = useState(false);
-
-    const handleLogoutForm = () => {
-        setLoginName("")
-        setShowLoginName("")
-        setToken(null)
-    }
-
-console.log(showUserInfo)
-    return (
-        <>
-            {showRegistrationForm ? (
-                <Register handleCloseForm={() => setShowRegisterForm(false)}/>
-            ) : showLoginForm ? (
-                <Login handleCloseForm={() => setShowLoginForm(false)} 
-                setLoginName={setLoginName} 
-                setShowLoginName={setShowLoginName} 
-                handleLogoutForm={handleLogoutForm}
-                setToken={setToken}
-                />
-            ) : (
-                <MovieList
-                    handleLoginForm={() => setShowLoginForm(true)}
-                    handleRegisterForm={() => setShowRegisterForm(true)}
-                    loginName={loginName}
-                    showLoginName={showLoginName}
-                    handleLogoutForm={handleLogoutForm}
-                    setShowUserInfo={setShowUserInfo}
-                />
-            )}
-            {showUserInfo && <User token={token}/>}
-        </>
-    );
-}
+const App = () => (
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
 
 export default App;

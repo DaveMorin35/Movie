@@ -4,6 +4,7 @@ import com.project.movie.database.model.User;
 import com.project.movie.database.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -40,6 +41,14 @@ public class UserController {
         }else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+
+    @PostMapping("abmelden")
+    public ResponseEntity<?>logout(){
+        System.out.println("Test");
+        SecurityContextHolder.clearContext();
+        System.out.println("Test2");
+        return ResponseEntity.ok("Logout Successfull");
     }
 
 }
