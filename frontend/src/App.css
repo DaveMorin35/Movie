@@ -22,3 +22,17 @@
   background: #D1D5DB;
   color: rgb(163,163,163);
 }
+
+.animate-move-from-top-to-middle {
+  animation: moveFromTopToMiddle 3s ease-in-out;
+}
+
+
+@keyframes moveFromTopToMiddle {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}

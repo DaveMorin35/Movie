@@ -24,7 +24,7 @@ export default function LoginConfirmation(){
         <>
 <div className="bg-gradient-to-r from-blue-950 to-blue-800 py-2.5 min-h-screen flex flex-col items-center">
    <div className="flex flex-grow flex-col justify-center items-center">
-    <p className="text-4xl text-neutral-400">Welcome {username}</p>
+    <p className="text-4xl text-neutral-400">Welcome {username} !</p>
     <User token={state?.token} />
    </div>
 </div>
