@@ -45,9 +45,7 @@ public class UserController {
 
     @PostMapping("abmelden")
     public ResponseEntity<?>logout(){
-        System.out.println("Test");
         SecurityContextHolder.clearContext();
-        System.out.println("Test2");
         return ResponseEntity.ok("Logout Successfull");
     }
 
